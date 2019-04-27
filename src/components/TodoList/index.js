@@ -26,10 +26,20 @@ class TodoList extends Component {
           items: prevState.items.concat(newItem)
         };
       });
+      console.log("test", this.state);
     }
-
-    console.log("test", this.state);
   }
+
+  removeItem = key => {
+    const filteredItems = this.state.items.filter(item => {
+      return item.key !== key;
+    });
+
+    this.setState({ items: filteredItems });
+    //  const listItems = this.props.items.filter(this.renderItem);
+    //   return <ul>{listItems}</ul>;
+  };
+
   render() {
     return (
       <div>
@@ -42,7 +52,7 @@ class TodoList extends Component {
           />
           <button type="submit">add</button>
         </form>
-        <TodoItems items={this.state.items} />
+        <TodoItems items={this.state.items} removeItem={this.removeItem} />
       </div>
     );
   }

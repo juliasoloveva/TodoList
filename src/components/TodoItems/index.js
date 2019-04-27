@@ -1,13 +1,18 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 
 class TodoItems extends Component {
-  static PropTypes = {
-    items: PropTypes.array
+  static propTypes = {
+    items: propTypes.array,
+    removeItem: propTypes.func
   };
 
   renderItem = item => {
-    return <li key={item.key}>{item.text}</li>;
+    return (
+      <li key={item.key} onClick={() => this.props.removeItem(item.key)}>
+        {item.text}
+      </li>
+    );
   };
   render() {
     const listItems = this.props.items.map(this.renderItem);
